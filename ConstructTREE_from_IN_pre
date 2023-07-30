@@ -1,0 +1,18 @@
+int findPos(int in[],int st,int end,int k){
+        for(int i=st;i<=end;i++)
+        if(in[i]==k)return i;
+    }
+    Node*help(int in[],int pre[],int n,int &indx,int st,int end){
+        if(indx==n || st>end)return NULL;
+        Node*root=new Node(pre[indx]);
+        int ele=pre[indx++];
+        int pos=findPos(in,st,end,ele);
+        root->left=help(in,pre,n,indx,st,pos-1);
+        root->right=help(in,pre,n,indx,pos+1,end);
+        return root;
+}
+    Node* buildTree(int in[],int pre[], int n)
+    {
+        int indx=0,st=0,end=n-1;
+        return help(in,pre,n,indx,st,end);
+    }
